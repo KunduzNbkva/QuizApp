@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
+
+    <ImageView
+        android:id="@+id/art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:src="@drawable/ic_art"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/questions_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/art"
+        android:layout_margin="20dp">
+      <TextView
+          style="@style/secondaryTextstyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/questions_amount" />
+        <TextView
+          android:id="@+id/text_amount"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="10"
+          android:layout_gravity="center_vertical"
+          android:textColor="@color/black"
+          android:textSize="20sp"
+          />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/questions_slider"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/questions_amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/MySeekBar"
+        />
+  <LinearLayout
+      android:id="@+id/category"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/questions_amount"
+      android:layout_margin="20dp">
+  <TextView
+      style="@style/secondaryTextstyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Category" />
+<com.jaredrummler.materialspinner.MaterialSpinner
+    android:id="@+id/category_spinner"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="25dp"
+    app:ms_arrow_tint="@color/black"
+    android:textColor="@color/black"
+    android:text="All"
+    android:textSize="20sp"
+    android:background="@drawable/spinner_background"
+    android:entries="@string/app_name" />
+  </LinearLayout>
+    <LinearLayout
+        android:id="@+id/difficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/secondaryTextstyle"
+            android:text="Difficulty"/>
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/difficulty_spinner"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            app:ms_arrow_tint="@color/black"
+            android:textColor="@color/black"
+            android:text="All"
+            android:textSize="20sp"
+            android:background="@drawable/spinner_background"
+            android:entries="@string/app_name" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficulty"
+        android:layout_marginTop="50dp"
+        android:text="START"
+        style="@style/buttonStyle"
+      />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
