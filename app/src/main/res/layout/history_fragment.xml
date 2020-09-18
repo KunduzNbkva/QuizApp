@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.history.HistoryFragment">
-
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/history_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/history_list"
+        />
+
 
 </FrameLayout>

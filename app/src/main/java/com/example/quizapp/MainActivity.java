@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private MainPagerAdapter pagerAdapter;
     private BottomNavigationView bottomNav;
     private Toolbar toolbar;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
