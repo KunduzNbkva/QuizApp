@@ -48,7 +48,6 @@ public class MainFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 questionsAmountTxt.setText(String.valueOf(i));
-
             }
 
             @Override
