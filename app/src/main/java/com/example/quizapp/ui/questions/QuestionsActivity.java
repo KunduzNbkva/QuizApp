@@ -89,6 +89,6 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
 
     @Override
     public void onClick(int position) {
-        viewModel.onClick();
+        viewModel.onClick(); //
     }
 }
