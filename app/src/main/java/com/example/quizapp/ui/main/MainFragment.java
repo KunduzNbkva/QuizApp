@@ -3,6 +3,7 @@ package com.example.quizapp.ui.main;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,12 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quizapp.R;
+import com.example.quizapp.ui.questions.QuestionsActivity;
 
 public class MainFragment extends Fragment {
     TextView questionsAmountTxt,countText;
     SeekBar questionsSeekbar;
     private MainViewModel mViewModel;
-    Button plus,minus;
+    Button plus,minus,startBtn;
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -41,22 +43,32 @@ public class MainFragment extends Fragment {
         questionsAmountTxt=view.findViewById(R.id.text_amount);
         questionsSeekbar=view.findViewById(R.id.questions_slider);
         questionsAmountTxt.setText("0");
+        startBtn=view.findViewById(R.id.start_btn);
         countText=view.findViewById(R.id.count_txt);
         plus=view.findViewById(R.id.plus_btn);
         minus=view.findViewById(R.id.minus_btn);
-        questionsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.plus();
+            }
+        });
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.minus();
+            }
+        });
+        questionsSeekbar.setOnSeekBarChangeListener(new SimpleOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 questionsAmountTxt.setText(String.valueOf(i));
             }
-
+        });
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), QuestionsActivity.class));
             }
         });
 
@@ -73,18 +85,7 @@ public class MainFragment extends Fragment {
             }
         });
         Log.e("fragment name","Main fragment");
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.plus();
-            }
-        });
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.minus();
-            }
-        });
+
     }
 
 

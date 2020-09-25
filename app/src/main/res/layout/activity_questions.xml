@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.quizapp.ui.questions.QuestionsViewModel"/>
+        <import type="android.view.View"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.questions.QuestionsActivity"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/questions_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title="Geography"
+        app:titleTextAppearance="@style/textStyle"
+        app:titleMarginStart="75dp"
+        android:background="@color/white"
+        app:navigationIcon="@drawable/ic_path"
+        tools:ignore="MissingConstraints">
+
+    </androidx.appcompat.widget.Toolbar>
+    <ProgressBar
+        android:id="@+id/questions_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:progressTint="@color/fillColor"
+        android:progress="10"
+        app:layout_constraintTop_toBottomOf="@id/questions_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_questions"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        tools:listitem="@layout/questions_item_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questions_progress"/>
+    <Button
+        android:id="@+id/btn_skip"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_questions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/btn_background"
+        android:text="Skip"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/btn_skip"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

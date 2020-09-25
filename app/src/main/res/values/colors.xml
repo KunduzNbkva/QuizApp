@@ -7,6 +7,5 @@
     <color name="black">#000000</color>
     <color name="fillColor">#DBA5F5</color>
     <color name="blue">#6979F8</color>
-
-
+    <color name="btn_skip">#FF6581</color>
 </resources>
