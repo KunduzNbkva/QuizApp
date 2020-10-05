@@ -1,8 +1,8 @@
-package com.example;
+package com.example.quizapp.core;
 
 import android.widget.SeekBar;
 
-public class SimpleSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
+public class SimpleOnSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 

@@ -1,4 +1,4 @@
-package com.example.quizapp;
+package com.example.quizapp.core;
 
 import android.content.Context;
 import android.util.AttributeSet;

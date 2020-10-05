@@ -23,6 +23,7 @@ import com.example.quizapp.R;
 import com.example.quizapp.models.CategoriesListModel;
 import com.example.quizapp.models.TriviaCategoryModel;
 import com.example.quizapp.ui.questions.QuestionsActivity;
+import com.example.quizapp.core.SimpleOnSeekBarChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MainFragment extends Fragment {
     private Spinner categoriesSpinner, difficultySpinner;
     private MainViewModel mViewModel;
     private Button plus, minus, startBtn;
-    private int amount, category;
+    private int category;
     private String difficulty;
 
 
@@ -58,7 +59,6 @@ public class MainFragment extends Fragment {
         difficultySpinner = view.findViewById(R.id.difficulty_spinner);
         questionsAmountTxt = view.findViewById(R.id.text_amount);
         questionsSeekbar = view.findViewById(R.id.questions_slider);
-        amount = 10;
         getQuestionsAmount();
         questionsAmountTxt.setText("0");
         startBtn = view.findViewById(R.id.start_btn);
@@ -88,7 +88,6 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
@@ -100,7 +99,6 @@ public class MainFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);//тут удалятся данные во вьюмодел
         mViewModel.result.observeForever(integer -> countText.setText(String.valueOf(integer)));
         observeGetCategories();
-        getParamsOfQuiz();
     }
 
     public void getQuestionsAmount() {
@@ -108,8 +106,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 super.onProgressChanged(seekBar, i, b);
-                amount = seekBar.getProgress();
-                countText.setText(amount);
+                countText.setText(i);
             }
         });
     }
@@ -145,11 +142,10 @@ public class MainFragment extends Fragment {
     }
 
     public void getParamsOfQuiz() {
-        Intent intent = new Intent(requireContext(),QuestionsActivity.class);
-        intent.putExtra(EXTRA_AMOUNT, amount);
+        Intent intent = new Intent(requireContext(), QuestionsActivity.class);
+        intent.putExtra(EXTRA_AMOUNT, questionsSeekbar.getProgress());
         intent.putExtra(EXTRA_DIFFICULTY, difficulty);
         intent.putExtra(EXTRA_CATEGORY, category);
         startActivity(intent);
-        Log.e("intent", "result: " + amount + " " + difficulty + " " + category);
     }
 }

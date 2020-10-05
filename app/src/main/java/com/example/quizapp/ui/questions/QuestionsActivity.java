@@ -3,7 +3,6 @@ package com.example.quizapp.ui.questions;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,13 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsActivity extends AppCompatActivity implements OnItemClickListener {
-  RecyclerView recyclerQuestions;
-  QuestionsAdapter adapter;
-  List<QuizModel> list = new ArrayList<>();
-  Button skip;
-  ActivityQuestionsBinding binding;
-  QuestionsViewModel viewModel;
-  private String difficulty;
+    private RecyclerView recyclerQuestions;
+    private QuestionsAdapter adapter;
+    private List<QuizModel> list = new ArrayList<>();
+    private Button skip;
+    private ActivityQuestionsBinding binding;
+    private QuestionsViewModel viewModel;
+    private String difficulty;
+    private  int amount,category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,29 +50,29 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
                     }
                 });
     }
+    public void getIntentData(){
+        Intent intent = getIntent();
+        amount = intent.getIntExtra("amount", 10);
+        difficulty = intent.getStringExtra("difficulty");
+        category = intent.getIntExtra("category", 9);
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     public void initViews() {
         viewModel = ViewModelProviders.of(this).get(QuestionsViewModel.class);
-        Intent intent=getIntent();
-        int amount=intent.getIntExtra("amount",10);
-        difficulty=intent.getStringExtra("difficulty");
-        int category=intent.getIntExtra("category",9);
-        viewModel.getData(amount,difficulty,category);
-        Log.e("difficulty"," "+ difficulty);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_questions);
-        binding.setViewModel(viewModel);
-        list = new ArrayList<>();
         recyclerQuestions = findViewById(R.id.recycler_questions);
-        adapter=new QuestionsAdapter(this, list);
+        list = new ArrayList<>();
+        getIntentData();
+        viewModel.getQuestions(amount, difficulty, category);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
+        binding.setViewModel(viewModel);
+        adapter = new QuestionsAdapter(this, list);
         recyclerQuestions.setAdapter(adapter);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerQuestions);
 
         viewModel.amountQuestions.observeForever(integer -> {
             recyclerQuestions.smoothScrollToPosition(integer);
-            Log.e("log"," is working " + integer);
-
         });
         skip = findViewById(R.id.btn_skip);
         skip.setOnClickListener(
@@ -80,17 +80,17 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
         );
     }
 
-
-
     @Override
     public void onClick(int position) {
         viewModel.onClick();
-        Log.e("log", "click is working");
     }
 
     private void onClick(View view) {
         viewModel.onClick();
-        Log.e("log", "click is working");
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

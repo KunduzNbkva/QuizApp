@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.quizapp.App;
+import com.example.quizapp.data.remote.QuizApiClient;
 import com.example.quizapp.data.remote.QuizApiService;
 import com.example.quizapp.models.QuizModel;
 
@@ -18,15 +19,20 @@ public class QuestionsViewModel extends ViewModel {
         amountQuestions.setValue(0);
     }
 
-    public void getData(int amount,String difficulty,int category) {
-        App.quizApiService.getQuestions(
-                callbackData,
-                amount,
-                difficulty,
-                category
-        );
+    public void getQuestions(int amount, String difficulty, int category) {
+        App.quizApiService.getQuestions(new QuizApiClient.QuestionsCallback() {
+            @Override
+            public void onSuccess(List<QuizModel> result) {
+                questions.setValue(result);
+            }
 
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        }, amount, difficulty, category);
     }
+
     private QuizApiService.QuizApiCallback callbackData = new QuizApiService.QuizApiCallback() {
 
         @Override
@@ -40,9 +46,9 @@ public class QuestionsViewModel extends ViewModel {
         }
     };
 
-        public void onClick() {
-            amountQuestions.setValue(amountQuestions.getValue() + 1);
-        }
+    public void onClick() {
+        amountQuestions.setValue(amountQuestions.getValue() + 1);
+    }
 
 
 }
