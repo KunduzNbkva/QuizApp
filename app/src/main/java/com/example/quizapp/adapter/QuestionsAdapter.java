@@ -1,5 +1,6 @@
 package com.example.quizapp.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,24 +9,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.Question;
+import com.example.quizapp.models.QuizModel;
 import com.example.quizapp.ui.questions.OnItemClickListener;
 
 import java.util.List;
 
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
-    List<Question> list;
+    List<QuizModel> list;
     OnItemClickListener itemClickListener;
 
-    public QuestionsAdapter(List<Question> list, OnItemClickListener itemClickListener) {
-        this.list = list;
+    public QuestionsAdapter(OnItemClickListener itemClickListener, List<QuizModel> list) {
         this.itemClickListener = itemClickListener;
-        notifyDataSetChanged();
+        this.list = list;
     }
+
+
 
     @NonNull
     @Override
@@ -36,11 +37,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(list.get(position));
+        holder.onBind(list.get(position),position);
     }
 
     @Override
     public int getItemCount() {
+
         return list.size();
     }
 
@@ -50,6 +52,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         Button answer1, answer2, answer3, answer4, boolean_answer1, boolean_answer2;
         LinearLayout multiplyButtons, booleanButtons;
         RecyclerView rv;
+        private int position;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,21 +104,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             });
         }
 
-        public void onBind(Question question) {
-            questionTextView.setText(question.getQuestion());
-            if (question.getMultiply() == true) {
-                booleanButtons.setVisibility(View.GONE);
-                multiplyButtons.setVisibility(View.VISIBLE);
-                answer1.setText(question.getAnswers()[0]);
-                answer2.setText(question.getAnswers()[1]);
-                answer3.setText(question.getAnswers()[2]);
-                answer4.setText(question.getAnswers()[3]);
-            } else {
-                multiplyButtons.setVisibility(View.GONE);
-                booleanButtons.setVisibility(View.VISIBLE);
-                boolean_answer1.setText(question.getAnswers()[0]);
-                boolean_answer2.setText(question.getAnswers()[1]);
-            }
+        public void onBind(QuizModel quizModel, int position) {
+            this.position=position;
+            questionTextView.setText(quizModel.getQuestion());
+            Log.e("question","question is: "+quizModel.getQuestion());
         }
     }
 }

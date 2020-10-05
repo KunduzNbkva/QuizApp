@@ -48,6 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/MySeekBar"
+        android:max="50"
         />
   <LinearLayout
       android:id="@+id/category"
@@ -62,17 +63,12 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="Category" />
-<com.jaredrummler.materialspinner.MaterialSpinner
-    android:id="@+id/category_spinner"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="25dp"
-    app:ms_arrow_tint="@color/black"
-    android:textColor="@color/black"
-    android:text="All"
-    android:textSize="20sp"
-    android:background="@drawable/spinner_background"
-    android:entries="@string/app_name" />
+              <Spinner
+                  android:id="@+id/categories_spinner"
+                  android:layout_width="300dp"
+                  android:layout_height="55dp"
+                  android:layout_gravity="center"
+                  />
   </LinearLayout>
     <LinearLayout
         android:id="@+id/difficulty"
@@ -87,18 +83,14 @@
             android:layout_height="wrap_content"
             style="@style/secondaryTextstyle"
             android:text="Difficulty"/>
-        <com.jaredrummler.materialspinner.MaterialSpinner
-            android:id="@+id/difficulty_spinner"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            app:ms_arrow_tint="@color/black"
-            android:textColor="@color/black"
-            android:text="All"
-            android:textSize="20sp"
-            android:background="@drawable/spinner_background"
-            android:entries="@string/app_name" />
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/difficulty_spinner"
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:entries="@array/spinner_difficulty"/>
+            </LinearLayout>
+
     <Button
         android:id="@+id/start_btn"
         android:layout_width="150dp"
