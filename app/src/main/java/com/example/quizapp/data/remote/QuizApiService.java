@@ -1,5 +1,7 @@
 package com.example.quizapp.data.remote;
 
+import android.util.Log;
+
 import com.example.quizapp.models.CategoriesListModel;
 import com.example.quizapp.models.QuizModel;
 import com.example.quizapp.models.QuizResponse;
@@ -23,27 +25,9 @@ public class QuizApiService implements QuizApiClient {
     QuizeApi service = retrofit.create(QuizeApi.class);
 
 
-    public void getCategories(CategoriesCallback callback) {
-        Call<CategoriesListModel> call = service.getCategories();
-        call.enqueue(new Callback<CategoriesListModel>() {
-            @Override
-            public void onResponse(Call<CategoriesListModel> call, Response<CategoriesListModel> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    callback.onSuccess(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CategoriesListModel> call, Throwable t) {
-
-            }
-        });
-
-    }
-
     @Override
     public void getQuestions(QuestionsCallback callback, int amount, String difficulty, int category) {
-        service.getQuestions(0, null, 0).enqueue(new Callback<QuizResponse>() {
+        service.getQuestions(amount, difficulty, category).enqueue(new Callback<QuizResponse>() {
             @Override
             public void onResponse(Call<QuizResponse> call, Response<QuizResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -60,6 +44,26 @@ public class QuizApiService implements QuizApiClient {
         });
     }
 
+    @Override
+    public void getCategories(QuizApiClient.CategoriesCallback callback) {
+        service.getCategories().enqueue(new Callback<CategoriesListModel>() {
+            @Override
+            public void onResponse(Call<CategoriesListModel> call, Response<CategoriesListModel> response) {
+                if(response.isSuccessful()&&response.body()!=null){
+                    callback.onSuccess(response.body());
+                }
+                else{
+                    callback.onFailure(new Exception("Response is empty: "+response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoriesListModel> call, Throwable t) {
+                   callback.onFailure(new Exception("Response is empty: "+t.getMessage()));
+            }
+        });
+    }
+
 
     interface QuizeApi {
         @GET("api.php")
@@ -70,17 +74,5 @@ public class QuizApiService implements QuizApiClient {
         @GET("api_category.php")
         Call<CategoriesListModel> getCategories();
 
-    }
-
-    public interface QuizApiCallback {
-        void onSuccess(List<QuizModel> quizModel);
-
-        void onFailure(Throwable exception);
-    }
-
-    public interface CategoriesCallback {
-        void onSuccess(CategoriesListModel categories);
-
-        void onFailure(Throwable exception);
     }
 }

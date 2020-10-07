@@ -35,7 +35,8 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questions);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
+        binding.setViewModel(viewModel);
         initViews();
         observeQuestions();
     }
@@ -64,8 +65,6 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
         list = new ArrayList<>();
         getIntentData();
         viewModel.getQuestions(amount, difficulty, category);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
-        binding.setViewModel(viewModel);
         adapter = new QuestionsAdapter(this, list);
         recyclerQuestions.setAdapter(adapter);
         SnapHelper snapHelper = new PagerSnapHelper();

@@ -32,12 +32,11 @@ public class MainFragment extends Fragment {
     private static final String EXTRA_AMOUNT = "amount";
     private static final String EXTRA_DIFFICULTY = "difficulty";
     private static final String EXTRA_CATEGORY = "category";
-    private static final int EXTRA_RCODE = 1;
     private TextView questionsAmountTxt, countText;
     private SeekBar questionsSeekbar;
     private Spinner categoriesSpinner, difficultySpinner;
     private MainViewModel mViewModel;
-    private Button plus, minus, startBtn;
+    private Button startBtn;
     private int category;
     private String difficulty;
 
@@ -63,14 +62,10 @@ public class MainFragment extends Fragment {
         questionsAmountTxt.setText("0");
         startBtn = view.findViewById(R.id.start_btn);
         countText = view.findViewById(R.id.count_txt);
-        plus = view.findViewById(R.id.plus_btn);
-        minus = view.findViewById(R.id.minus_btn);
         setListeners();
     }
 
     public void setListeners() {
-        plus.setOnClickListener(view1 -> mViewModel.plus());
-        minus.setOnClickListener(view12 -> mViewModel.minus());
         questionsSeekbar.setOnSeekBarChangeListener(new SimpleOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -116,15 +111,15 @@ public class MainFragment extends Fragment {
         mViewModel.listCategories.observe(getViewLifecycleOwner(), new Observer<CategoriesListModel>() {
             @Override
             public void onChanged(CategoriesListModel categoriesListModel) {
-                List<TriviaCategoryModel> categoryList;
-                categoryList = (List<TriviaCategoryModel>) categoriesListModel.getTriviaCategories();
+                List<TriviaCategoryModel> categoryList = categoriesListModel.getTriviaCategories();
                 List<String> categoriesName = new ArrayList<>();
                 for (TriviaCategoryModel triviaCategoryModel : categoryList) {
                     categoriesName.add(triviaCategoryModel.getName());
                 }
-                Log.e("spinner", "name " + categoriesName.get(0));
-                ArrayAdapter<String> adapter = new
-                        ArrayAdapter<>(requireContext(), R.layout.support_simple_spinner_dropdown_item, categoriesName);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        requireContext(),
+                        R.layout.support_simple_spinner_dropdown_item,
+                        categoriesName);
                 adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                 categoriesSpinner.setAdapter(adapter);
                 categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

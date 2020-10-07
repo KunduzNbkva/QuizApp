@@ -1,5 +1,6 @@
 package com.example.quizapp.data.remote;
 
+import com.example.quizapp.models.CategoriesListModel;
 import com.example.quizapp.models.QuizModel;
 import com.example.quizapp.core.BaseCallback;
 
@@ -13,6 +14,14 @@ public interface QuizApiClient {
         void onSuccess(List<QuizModel> result);
 
         @Override
+        void onFailure(Exception exception);
+    }
+
+    void getCategories(CategoriesCallback callback);
+
+    interface CategoriesCallback {
+        void onSuccess(CategoriesListModel categories);
+
         void onFailure(Exception exception);
     }
 }

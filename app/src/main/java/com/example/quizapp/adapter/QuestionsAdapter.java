@@ -27,7 +27,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     }
 
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,12 +36,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(list.get(position),position);
+        holder.onBind(list.get(position), position);
     }
 
     @Override
     public int getItemCount() {
-
         return list.size();
     }
 
@@ -105,9 +103,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         }
 
         public void onBind(QuizModel quizModel, int position) {
-            this.position=position;
+            this.position = position;
             questionTextView.setText(quizModel.getQuestion());
-            Log.e("question","question is: "+quizModel.getQuestion());
         }
     }
 }

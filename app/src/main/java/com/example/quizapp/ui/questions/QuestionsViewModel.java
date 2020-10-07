@@ -33,19 +33,6 @@ public class QuestionsViewModel extends ViewModel {
         }, amount, difficulty, category);
     }
 
-    private QuizApiService.QuizApiCallback callbackData = new QuizApiService.QuizApiCallback() {
-
-        @Override
-        public void onSuccess(List<QuizModel> quizModel) {
-            questions.setValue(quizModel);
-        }
-
-        @Override
-        public void onFailure(Throwable exception) {
-
-        }
-    };
-
     public void onClick() {
         amountQuestions.setValue(amountQuestions.getValue() + 1);
     }
