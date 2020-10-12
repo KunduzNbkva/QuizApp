@@ -1,5 +1,8 @@
 package com.example.quizapp.models;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +14,7 @@ public class QuizModel {
     private String category;
     @SerializedName("type")
     @Expose
-    private String type;
+    private Type type;
     @SerializedName("difficulty")
     @Expose
     private String difficulty;
@@ -25,6 +28,28 @@ public class QuizModel {
     @Expose
     private List<String> incorrectAnswers = null;
 
+    private List<String> answers;
+
+    private Integer selectedAnswerPosition;
+
+    private MutableLiveData<Boolean> isAnswered = new MutableLiveData<>(false);
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+    public Integer getSelectedAnswerPosition() {
+        return selectedAnswerPosition;
+    }
+
+    public void setSelectedAnswerPosition(Integer selectedAnswerPosition) {
+        this.selectedAnswerPosition = selectedAnswerPosition;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -33,13 +58,14 @@ public class QuizModel {
         this.category = category;
     }
 
-    public String getType() {
-        return type;
+    public MutableLiveData<Boolean> getIsAnswered() {
+        return isAnswered;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setIsAnswered(MutableLiveData<Boolean> isAnswered) {
+        this.isAnswered = isAnswered;
     }
+
 
     public String getDifficulty() {
         return difficulty;
@@ -71,6 +97,14 @@ public class QuizModel {
 
     public void setIncorrectAnswers(List<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
 

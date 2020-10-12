@@ -1,5 +1,7 @@
 package com.example.quizapp.ui.main;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import androidx.lifecycle.ViewModel;
@@ -22,6 +24,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onSuccess(CategoriesListModel categories) {
                 listCategories.setValue(categories);
+                Log.e("categories","categories"+listCategories.getValue());
             }
 
             @Override

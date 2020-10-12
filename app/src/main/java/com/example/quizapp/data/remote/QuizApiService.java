@@ -1,12 +1,7 @@
 package com.example.quizapp.data.remote;
 
-import android.util.Log;
-
 import com.example.quizapp.models.CategoriesListModel;
-import com.example.quizapp.models.QuizModel;
 import com.example.quizapp.models.QuizResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,17 +44,16 @@ public class QuizApiService implements QuizApiClient {
         service.getCategories().enqueue(new Callback<CategoriesListModel>() {
             @Override
             public void onResponse(Call<CategoriesListModel> call, Response<CategoriesListModel> response) {
-                if(response.isSuccessful()&&response.body()!=null){
+                if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
-                }
-                else{
-                    callback.onFailure(new Exception("Response is empty: "+response.code()));
+                } else {
+                    callback.onFailure(new Exception("Response is empty: " + response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<CategoriesListModel> call, Throwable t) {
-                   callback.onFailure(new Exception("Response is empty: "+t.getMessage()));
+                callback.onFailure(new Exception("Response is empty: " + t.getMessage()));
             }
         });
     }

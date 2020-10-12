@@ -2,7 +2,6 @@ package com.example.quizapp.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class MainFragment extends Fragment {
     private MainViewModel mViewModel;
     private Button startBtn;
     private int category;
-    private String difficulty;
+    private String difficulty,categoryResult;
 
 
     public static MainFragment newInstance() {
@@ -108,31 +107,29 @@ public class MainFragment extends Fragment {
 
     public void observeGetCategories() {
         mViewModel.getCategories();
-        mViewModel.listCategories.observe(getViewLifecycleOwner(), new Observer<CategoriesListModel>() {
-            @Override
-            public void onChanged(CategoriesListModel categoriesListModel) {
-                List<TriviaCategoryModel> categoryList = categoriesListModel.getTriviaCategories();
-                List<String> categoriesName = new ArrayList<>();
-                for (TriviaCategoryModel triviaCategoryModel : categoryList) {
-                    categoriesName.add(triviaCategoryModel.getName());
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        requireContext(),
-                        R.layout.support_simple_spinner_dropdown_item,
-                        categoriesName);
-                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-                categoriesSpinner.setAdapter(adapter);
-                categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        category = categoriesListModel.getTriviaCategories().get(i).getId();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+        mViewModel.listCategories.observe(getViewLifecycleOwner(), categoriesListModel -> {
+            List<TriviaCategoryModel> categoryList = categoriesListModel.getTriviaCategories();
+            List<String> categoriesName = new ArrayList<>();
+            for (TriviaCategoryModel triviaCategoryModel : categoryList) {
+                categoriesName.add(triviaCategoryModel.getName());
             }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    requireContext(),
+                    R.layout.support_simple_spinner_dropdown_item,
+                    categoriesName);
+            adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+            categoriesSpinner.setAdapter(adapter);
+            categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    category = categoriesListModel.getTriviaCategories().get(i).getId();
+                    categoryResult=categoriesListModel.getTriviaCategories().get(i).getName();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
         });
     }
 
@@ -141,6 +138,7 @@ public class MainFragment extends Fragment {
         intent.putExtra(EXTRA_AMOUNT, questionsSeekbar.getProgress());
         intent.putExtra(EXTRA_DIFFICULTY, difficulty);
         intent.putExtra(EXTRA_CATEGORY, category);
+        intent.putExtra("categoryResult",categoryResult);
         startActivity(intent);
     }
 }
