@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="6dp">
+                android:padding="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/category_linear"
                 android:orientation="horizontal"
-                android:padding="6dp">
+                android:padding="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,7 +70,18 @@
                     android:id="@+id/correct_answers_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8/10"
+                    android:text="8"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/total_questions_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -100,10 +111,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="190dp"
                     android:text="18 sep 2020 13:01"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:layout_marginBottom="4dp"/>
             </LinearLayout>
-
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

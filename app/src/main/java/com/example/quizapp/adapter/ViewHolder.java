@@ -91,8 +91,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(QuizModel quizModel, int position) {
         this.quizModel = quizModel;
-        setClickable(!quizModel.getIsAnswered().getValue());
-        observeClick();
+        setClickable(quizModel.getIsAnswered());
         clearHolder();
         this.position = position;
         questionTextView.setText(Html.fromHtml(quizModel.getQuestion()));
@@ -114,7 +113,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onAnswerClick(View view, String selected, String correctAnswer,OnItemClickListener listener) {
-        quizModel.getIsAnswered().setValue(true);
+        quizModel.setIsAnswered(true);
         setClickable(false);
         if (selected.equals(correctAnswer)) {
             view.setBackgroundResource(R.drawable.btn_background_correct);
@@ -144,16 +143,17 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         boolean_answer1.setClickable(bool);
         boolean_answer2.setClickable(bool);
     }
-    private void observeClick(){
-        quizModel.getIsAnswered().observeForever(new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if(aBoolean){
-                setClickable(false);
-                }
-            }
-        });
-    }
+
+//    private void observeClick(){
+//        quizModel.getIsAnswered().observeForever(new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(Boolean aBoolean) {
+//                if(aBoolean){
+//                setClickable(false);
+//                }
+//            }
+//        });
+//    }
 }
 
 

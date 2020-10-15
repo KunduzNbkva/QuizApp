@@ -9,8 +9,9 @@
     android:padding="6dp">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_height="60dp"
+    android:gravity="center_vertical">
     <TextView
         android:id="@+id/share_app"
         android:layout_width="wrap_content"
@@ -31,8 +32,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_height="60dp"
+        android:gravity="center_vertical">
     <TextView
         android:id="@+id/rate_us"
         android:layout_width="wrap_content"
@@ -51,8 +53,9 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_height="60dp"
+        android:gravity="center_vertical">
     <TextView
         android:id="@+id/feedback"
         android:layout_width="wrap_content"
@@ -70,9 +73,11 @@
         android:src="@drawable/ic_next"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/clear_history_linear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_height="60dp"
+        android:gravity="center_vertical">
     <TextView
         android:id="@+id/clear_history"
         android:layout_width="wrap_content"

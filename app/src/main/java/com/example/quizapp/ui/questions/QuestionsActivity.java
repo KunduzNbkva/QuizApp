@@ -3,6 +3,7 @@ package com.example.quizapp.ui.questions;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.App;
 import com.example.quizapp.R;
 import com.example.quizapp.ResultActivity;
 import com.example.quizapp.adapter.QuestionsAdapter;
@@ -24,7 +26,9 @@ import com.example.quizapp.databinding.ActivityQuestionsBinding;
 import com.example.quizapp.models.QuizModel;
 import com.example.quizapp.models.ResultModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class QuestionsActivity extends AppCompatActivity implements OnItemClickListener {
@@ -79,7 +83,6 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
                     public void onChanged(List<QuizModel> response) {
                         list.addAll(response);
                         adapter.notifyDataSetChanged();
-
                     }
                 });
     }
@@ -99,8 +102,10 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
                     Intent resultIntent=new Intent(QuestionsActivity.this,ResultActivity.class);
                     resultIntent.putExtra("difficulty",getIntent().getStringExtra("difficulty"));
                     resultIntent.putExtra("category",categoryResult);
-                    resultIntent.putExtra("amount",getIntent().getIntExtra("amount",10));
+                    resultIntent.putExtra("amount",amount);
                     resultIntent.putExtra("amountQuestions",correctAnswers);
+                    ResultModel resultModel=new ResultModel(0,categoryResult,difficulty,correctAnswers,list,new Date());
+                    App.historyStorage.saveQuizResult(resultModel); //saving
                     startActivity(resultIntent);
                 }
             }
@@ -111,6 +116,7 @@ public class QuestionsActivity extends AppCompatActivity implements OnItemClickL
         viewModel.finishQuiz.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
+
                 finish();
             }
         });

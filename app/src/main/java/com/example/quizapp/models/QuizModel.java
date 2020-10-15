@@ -32,7 +32,7 @@ public class QuizModel {
 
     private Integer selectedAnswerPosition;
 
-    private MutableLiveData<Boolean> isAnswered = new MutableLiveData<>(false);
+    private boolean isAnswered = true;
 
     public List<String> getAnswers() {
         return answers;
@@ -58,11 +58,11 @@ public class QuizModel {
         this.category = category;
     }
 
-    public MutableLiveData<Boolean> getIsAnswered() {
+    public boolean getIsAnswered() {
         return isAnswered;
     }
 
-    public void setIsAnswered(MutableLiveData<Boolean> isAnswered) {
+    public void setIsAnswered(boolean isAnswered) {
         this.isAnswered = isAnswered;
     }
 

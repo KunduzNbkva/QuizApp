@@ -2,6 +2,10 @@ package com.example.quizapp.ui.settings;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.quizapp.App;
+
 public class SettingsViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+    void deleteAll(){
+        App.historyStorage.deleteAll();
+    }
 }

@@ -1,8 +1,4 @@
 package com.example.quizapp.ui.questions;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 
@@ -10,10 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.quizapp.App;
-import com.example.quizapp.ResultActivity;
 import com.example.quizapp.data.remote.QuizApiClient;
-import com.example.quizapp.data.remote.QuizApiService;
-import com.example.quizapp.models.Question;
 import com.example.quizapp.models.QuizModel;
 
 import java.util.List;
@@ -49,7 +42,7 @@ public class QuestionsViewModel extends ViewModel {
         if (amountQuestions.getValue() == mQuestion.size() - 1) {
             finishQuiz();
         } else {
-            questions.getValue().get(amountQuestions.getValue()).getIsAnswered().setValue(true);
+            questions.getValue().get(amountQuestions.getValue()).setIsAnswered(false);
             amountQuestions.setValue(amountQuestions.getValue() + 1);
         }
     }
@@ -64,7 +57,6 @@ public class QuestionsViewModel extends ViewModel {
                         mQuestion.get(pos).setSelectedAnswerPosition(selectedAnswerPosition);
                         questions.setValue(mQuestion);
                         amountQuestions.setValue(amountQuestions.getValue() + 1);
-                        Log.e("AnswerClick", "to get next question" + amountQuestions.getValue() + 1);
                     } else if (pos == mQuestion.size() - 1) {
                         resultQuiz.setValue(true);
                     }
