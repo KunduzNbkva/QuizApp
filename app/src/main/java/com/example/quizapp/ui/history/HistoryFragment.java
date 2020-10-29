@@ -77,4 +77,6 @@ public class HistoryFragment extends BaseFragment implements OnItemClick {
         App.historyStorage.delete(id);
         showToast("Deleted");
     }
+
+
 }

@@ -7,7 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.settings.SettingsFragment"
     android:orientation="vertical"
-    android:padding="6dp">
+    android:padding="6dp"
+    android:background="?attr/backgroundColor">
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="horizontal"
@@ -20,7 +21,7 @@
         android:text="Share this app"
         android:textSize="20sp"
         android:layout_margin="8dp"
-        android:textColor="@color/black">
+        android:textColor="?attr/titleTextColor">
     </TextView>
     <ImageView
         android:id="@+id/info_img"
@@ -43,7 +44,7 @@
         android:text="Rate us"
         android:textSize="20sp"
         android:layout_margin="8dp"
-        android:textColor="@color/black"/>
+        android:textColor="?attr/titleTextColor"/>
         <ImageView
             android:id="@+id/info_"
             android:layout_width="50dp"
@@ -64,7 +65,7 @@
         android:text="Leave feedback"
         android:textSize="20sp"
         android:layout_margin="8dp"
-        android:textColor="@color/black"/>
+        android:textColor="?attr/titleTextColor"/>
     <ImageView
         android:id="@+id/inf"
         android:layout_width="50dp"
@@ -86,7 +87,7 @@
         android:text="Clear History"
         android:textSize="20sp"
         android:layout_margin="8dp"
-        android:textColor="@color/black"/>
+        android:textColor="?attr/titleTextColor"/>
         <ImageView
             android:id="@+id/in"
             android:layout_width="50dp"
@@ -107,7 +108,7 @@
             android:text="Themes"
             android:textSize="20sp"
             android:layout_margin="8dp"
-            android:textColor="@color/black"/>
+            android:textColor="?attr/titleTextColor"/>
         <ImageView
             android:id="@+id/i"
             android:layout_width="50dp"

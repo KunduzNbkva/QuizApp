@@ -8,6 +8,7 @@ import com.example.quizapp.data.QuizRepository;
 import com.example.quizapp.data.data.HistoryStorage;
 import com.example.quizapp.data.data.IHistoryStorage;
 import com.example.quizapp.data.local.QuestionDataBase;
+import com.example.quizapp.data.pref.SharedPref;
 import com.example.quizapp.data.remote.QuizApiService;
 
 public class App extends Application {
@@ -15,6 +16,7 @@ public class App extends Application {
     public static QuizRepository quizRepository;
     public static QuestionDataBase database;
     public static IHistoryStorage historyStorage;
+    public static SharedPref prefs;
 
 
     @Override
@@ -30,5 +32,9 @@ public class App extends Application {
                 .build();
         database.questionDao();
         historyStorage=new HistoryStorage(database.questionDao());
+        prefs=new SharedPref(this);
+    }
+    public SharedPref getPrefs(){
+        return prefs;
     }
 }

@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         app:title="@string/app_name"
         app:titleTextAppearance="@style/textStyle"
-        android:background="@color/white"
+        android:background="?attr/backgroundColor"
         tools:ignore="MissingConstraints">
     </androidx.appcompat.widget.Toolbar>
 
@@ -31,7 +31,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/backgroundColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

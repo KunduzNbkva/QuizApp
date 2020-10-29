@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="ds">
     <attr name="backgroundColor" format="color"/>
+        <attr name="titleTextColor" format="color"/>
     </declare-styleable>
 
 
